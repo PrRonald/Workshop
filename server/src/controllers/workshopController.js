@@ -53,12 +53,11 @@ export const updateWorkshop = async (req, res) => {
 // Delete a workshop
 export const deleteWorkshop = async (req, res) => {
   try {
-    const workshop = await Workshop.findById(req.params.id);
+    const workshop = await Workshop.findByIdAndDelete(req.params.id);
     if (!workshop) {
       return res.status(404).json({ message: 'Workshop not found' });
     }
-    
-    await workshop.remove();
+
     res.status(200).json({ message: 'Workshop deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
